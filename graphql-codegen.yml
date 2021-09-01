@@ -1,0 +1,33 @@
+overwrite: true
+hooks:
+  afterAllFileWrite:
+    - prettier --single-quote --write
+watch: true
+config:
+  withHOC: false
+  withComponent: false
+  withMutationFn: false
+  withHooks: false
+  rawRequest: true
+generates:
+  src/repositories/subgraph/v1Client.ts:
+    schema: 'https://api.thegraph.com/subgraphs/name/aave/protocol-multy-raw'
+    documents:
+      - 'src/repositories/subgraph/v1/*.queries.ts'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+  src/repositories/subgraph/v2Client.ts:
+    schema:
+      - https://api.thegraph.com/subgraphs/name/aave/protocol-v2
+    documents:
+      - 'src/repositories/subgraph/v2/*.queries.ts'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request

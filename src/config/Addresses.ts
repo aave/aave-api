@@ -1,0 +1,3 @@
+export const addresses = {
+  PERMISSION_MANAGER: '0x058A909519020C4A39A24532F535423A178e7aaa',
+} as const;

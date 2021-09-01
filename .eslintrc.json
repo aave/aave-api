@@ -1,0 +1,35 @@
+{
+  "parser": "@typescript-eslint/parser", // Specifies the ESLint parser
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "settings": {},
+  "extends": [
+    "airbnb-typescript/base",
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "prettier/@typescript-eslint", // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:prettier/recommended" // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+  ],
+  "rules": {
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "no-restricted-properties": "off",
+    "no-restricted-syntax": "off", // disallows for of loops
+    "no-await-in-loop": "off", // there are cases in which serial processing is needed to ensure correctness
+    "import/no-extraneous-dependencies": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["camelCase", "UPPER_CASE"]
+      }
+    ],
+    "@typescript-eslint/explicit-module-boundary-types": ["error"],
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/prefer-readonly": ["error"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-shadow": "off"
+  }
+}

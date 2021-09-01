@@ -1,0 +1,5 @@
+node_modules
+dist
+src/contracts
+src/__Mocks__
+src/**/*.test.ts

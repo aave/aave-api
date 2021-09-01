@@ -1,0 +1,40 @@
+version: '3.5'
+
+volumes:
+  mongo-data:
+
+x-base-service: &base-service
+  build:
+    context: ./
+    target: supercronic
+  volumes:
+    - type: bind
+      source: ./
+      target: /app
+  working_dir: /app
+  env_file:
+    - .env
+  depends_on:
+    - mongodb
+
+services:
+  api:
+    <<: *base-service
+    ports:
+      - target: 3000
+        published: 3000
+    command: npm run start
+
+  mongodb:
+    image: mongo:4.4
+    volumes:
+      - type: volume
+        source: mongo-data
+        target: /data/db
+    ports:
+      - target: 27017
+        published: 27017
+
+  worker:
+    <<: *base-service
+    command: npm run sys:start-cron
