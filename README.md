@@ -13,7 +13,7 @@
 
 # Aave api. Historical data and custom permissions :ghost:
 
-Thin and simple data caching layer for fetching historical rates & custom user permissions.
+Thin and simple data caching layer for fetching historical rates.
 
 ## Contribution
 

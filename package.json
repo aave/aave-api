@@ -7,10 +7,9 @@
   "license": "BSD-3-Clause",
   "main": "index.ts",
   "scripts": {
-    "start": "npm i && npm run compile && nodemon",
+    "start": "npm i && nodemon",
     "prod": "ts-node ./src/index.ts",
     "sys:start-cron": "supercronic ./src/cron-jobs/crontab",
-    "compile": "SKIP_LOAD=true hardhat compile",
     "lint": "prettier --write .",
     "dev:codegen": "graphql-codegen --config graphql-codegen.yml",
     "cron:update-reserveHistory": "ts-node ./src/cron-jobs/reserveHistory-updates"
@@ -26,6 +25,7 @@
     "cors": "^2.8.5",
     "dayjs": "^1.10.3",
     "env-cmd": "^10.1.0",
+    "ethers": "^5.4.7",
     "express": "^4.17.1",
     "graphql": "^15.4.0",
     "graphql-request": "^3.4.0",
@@ -34,7 +34,6 @@
     "mongoose": "^5.11.13",
     "morgan": "^1.10.0",
     "reflect-metadata": "^0.1.13",
-    "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3"
   },
   "devDependencies": {
@@ -43,7 +42,6 @@
     "@graphql-codegen/typescript": "^1.20.0",
     "@graphql-codegen/typescript-graphql-request": "^3.0.0",
     "@graphql-codegen/typescript-operations": "^1.17.13",
-    "@typechain/ethers-v5": "^5.0.0",
     "@types/body-parser": "^1.19.0",
     "@types/cors": "^2.8.9",
     "@types/express": "^4.17.9",
@@ -51,7 +49,6 @@
     "@types/mongodb": "^3.6.3",
     "@types/morgan": "^1.9.2",
     "@types/node": "^12.7.5",
-    "@types/swagger-ui-express": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "eslint": "^7.8.1",
@@ -59,9 +56,6 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "ethers": "^5.0.24",
-    "hardhat": "^2.0.7",
-    "hardhat-typechain": "^0.3.4",
     "husky": "^4.3.8",
     "jest": "^26.1.0",
     "lint-staged": "^10.5.4",
@@ -70,7 +64,6 @@
     "ts-generator": "^0.1.1",
     "ts-node": "^9.1.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typechain": "^4.0.1",
     "typescript": "^4.1.3"
   },
   "husky": {

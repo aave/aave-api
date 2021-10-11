@@ -4,14 +4,11 @@ import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { inject, injectable } from 'inversify';
-import swaggerUi from 'swagger-ui-express';
-import path from 'path';
 import ApiInterface from './interfaces/Api';
 import MongoDBInterface from './interfaces/MongoDB';
 import routes from './routes';
 import ErrorHandler, { notFound } from './helpers/ErrorHandlers';
 import { loggerInstance } from './helpers/Logger';
-import swaggerDocument from './swagger.json';
 
 @injectable()
 export default class Api implements ApiInterface {
@@ -31,32 +28,9 @@ export default class Api implements ApiInterface {
     this.initMiddlewares();
     this.logRequests();
     this.initEndpointRoutes();
-    this.serveSwaggerApiDocs();
     this.catchErrors();
 
     return this.express;
-  }
-
-  private serveSwaggerApiDocs() {
-    const options = {
-      customCss: '.swagger-ui .topbar { display: none }',
-      customSiteTitle: 'Aave API Documentation',
-      customfavIcon: '/assets/favicon.ico',
-    };
-
-    const assetPath = path.join(__dirname, '../assets');
-    this.express.use('/assets', express.static(assetPath));
-
-    this.express.use(
-      '/api-docs',
-      swaggerUi.serve,
-      swaggerUi.setup(swaggerDocument, options),
-    );
-    this.express.use(
-      '/',
-      swaggerUi.serve,
-      swaggerUi.setup(swaggerDocument, options),
-    );
   }
 
   private initMiddlewares() {
