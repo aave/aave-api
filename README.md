@@ -11,7 +11,7 @@
  -/:             :/-  -/:             :/.     ://:         `/////////////-
 ```
 
-# Aave api. Historical data and custom permissions :ghost:
+# Aave api for Historical data :ghost:
 
 Thin and simple data caching layer for fetching historical rates.
 
