@@ -1,0 +1,52 @@
+name: Build container image from master branch
+
+concurrency:
+  group: '${{ github.workflow }}-${{ github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+permissions:
+  packages: write
+
+on:
+  push:
+    branches:    
+      - 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      
+      - name: Login to GHCR
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ github.token }}
+      
+      - name: Set image name without tag
+        id: set_image_name
+        shell: bash
+        run: |
+          echo "::set-output name=name::${{ env.REGISTRY }}/${REPO_NAME,,}"
+        env:
+          REPO_NAME: '${{ github.repository }}'
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ${{ steps.set_image_name.outputs.name }}:latest
+            ${{ steps.set_image_name.outputs.name }}:master
+            ${{ steps.set_image_name.outputs.name }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
